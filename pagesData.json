@@ -1,0 +1,187 @@
+{
+  "demo-product": {
+    "slug": "demo-product",
+    "components": [
+      {
+        "type": "TextSection",
+        "props": {
+          "title": "Revolutionary Product Launch",
+          "content": "Introducing our latest innovation that will change the way you work.",
+          "size": "lg",
+          "align": "center"
+        }
+      },
+      {
+        "type": "ImageBlock",
+        "props": {
+          "src": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop",
+          "alt": "Product showcase",
+          "caption": "Our flagship product in action",
+          "width": 800,
+          "height": 400
+        }
+      },
+      {
+        "type": "StatsBox",
+        "props": {
+          "stats": [
+            {
+              "label": "Users",
+              "value": "10,000+",
+              "description": "Active monthly users"
+            },
+            {
+              "label": "Growth",
+              "value": "150%",
+              "description": "Year over year"
+            },
+            {
+              "label": "Rating",
+              "value": "4.9/5",
+              "description": "Customer satisfaction"
+            }
+          ]
+        }
+      },
+      {
+        "type": "CTA",
+        "props": {
+          "text": "Try It Free Today",
+          "href": "/signup",
+          "variant": "primary",
+          "size": "lg"
+        }
+      }
+    ]
+  },
+  "company-overview": {
+    "slug": "company-overview",
+    "components": [
+      {
+        "type": "TextSection",
+        "props": {
+          "title": "About Our Company",
+          "content": "We are a forward-thinking technology company dedicated to creating innovative solutions that empower businesses and individuals to achieve their goals.",
+          "size": "md",
+          "align": "center"
+        }
+      },
+      {
+        "type": "Card",
+        "props": {
+          "title": "Our Mission",
+          "content": "To democratize technology and make powerful tools accessible to everyone, regardless of their technical background.",
+          "variant": "primary"
+        }
+      },
+      {
+        "type": "Card",
+        "props": {
+          "title": "Our Vision",
+          "content": "A world where technology serves humanity, fostering creativity, collaboration, and sustainable growth.",
+          "variant": "secondary"
+        }
+      },
+      {
+        "type": "ImageBlock",
+        "props": {
+          "src": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop",
+          "alt": "Team collaboration",
+          "caption": "Our diverse team working together",
+          "width": 800,
+          "height": 400
+        }
+      },
+      {
+        "type": "StatsBox",
+        "props": {
+          "stats": [
+            {
+              "label": "Founded",
+              "value": "2020",
+              "description": "Years of innovation"
+            },
+            {
+              "label": "Team Size",
+              "value": "50+",
+              "description": "Talented professionals"
+            },
+            {
+              "label": "Countries",
+              "value": "15",
+              "description": "Global presence"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "product-launch-2024": {
+    "slug": "product-launch-2024",
+    "components": [
+      {
+        "type": "TextSection",
+        "props": {
+          "title": "Revolutionary AI Product Launch 2024",
+          "content": "We're excited to announce our groundbreaking AI-powered solution that will transform how businesses operate in the digital age.",
+          "size": "xl",
+          "align": "center"
+        }
+      },
+      {
+        "type": "ImageBlock",
+        "props": {
+          "src": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+          "alt": "AI Technology Visualization",
+          "caption": "Next-generation AI technology",
+          "width": 800,
+          "height": 400
+        }
+      },
+      {
+        "type": "StatsBox",
+        "props": {
+          "stats": [
+            {
+              "label": "Processing Speed",
+              "value": "10x",
+              "description": "Faster than competitors"
+            },
+            {
+              "label": "Accuracy Rate",
+              "value": "99.9%",
+              "description": "Industry leading precision"
+            },
+            {
+              "label": "Cost Savings",
+              "value": "40%",
+              "description": "Average client reduction"
+            },
+            {
+              "label": "Integration Time",
+              "value": "24hrs",
+              "description": "Quick deployment"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Card",
+        "props": {
+          "title": "Early Access Program",
+          "content": "Join our exclusive early access program and be among the first to experience the future of AI automation. Limited spots available.",
+          "variant": "primary"
+        }
+      },
+      {
+        "type": "CTA",
+        "props": {
+          "text": "Join Early Access",
+          "href": "/early-access",
+          "variant": "primary",
+          "size": "lg"
+        }
+      }
+    ]
+  }
+}

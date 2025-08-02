@@ -1,0 +1,30 @@
+{
+  "demo-product": {
+    "slug": "demo-product",
+    "components": [
+      {
+        "type": "TextSection",
+        "props": {
+          "title": "Revolutionary Product Launch",
+          "content": "Introducing our latest innovation that will change the way you work.",
+          "size": "lg",
+          "align": "center"
+        }
+      }
+    ]
+  },
+  "company-overview": {
+    "slug": "company-overview",
+    "components": [
+      {
+        "type": "TextSection",
+        "props": {
+          "title": "About Our Company",
+          "content": "We are a forward-thinking tech company building innovative solutions.",
+          "size": "md",
+          "align": "center"
+        }
+      }
+    ]
+  }
+}
