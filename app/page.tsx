@@ -40,7 +40,23 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-          
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h3 className="text-xl font-semibold mb-4">Demo Pages</h3>
+              <div className="space-y-2">
+                <Link 
+                  href="/demo-product" 
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  🚀 Product Demo Page
+                </Link>
+                <Link 
+                  href="/company-overview" 
+                  className="block text-blue-600 hover:text-blue-800"
+                >
+                  🏢 Company Overview
+                </Link>
+              </div>
+            </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h3 className="text-xl font-semibold mb-4">Available Components</h3>
