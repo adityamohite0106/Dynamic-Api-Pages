@@ -1,6 +1,6 @@
-
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Page as PrismaPage } from '@prisma/client';
 import { PageData } from './types';
+
 
 const prisma = new PrismaClient();
 
@@ -19,14 +19,20 @@ export async function getPage(slug: string): Promise<PageData | undefined> {
   const page = await prisma.page.findUnique({
     where: { slug },
   });
-  return page ? { slug: page.slug, components: page.components as PageData['components'] } : undefined;
+
+  return page
+    ? {
+        slug: page.slug,
+        components: page.components as unknown as PageData['components'],
+      }
+    : undefined;
 }
 
 export async function getAllPages(): Promise<PageData[]> {
   const pages = await prisma.page.findMany();
-  return pages.map((page: { slug: string; components: PageData['components'] }) => ({
+  return pages.map((page: PrismaPage) => ({
     slug: page.slug,
-    components: page.components,
+    components: page.components as unknown as PageData['components'],
   }));
 }
 
@@ -106,7 +112,8 @@ export async function initializeDemoPages(): Promise<void> {
         type: 'Card',
         props: {
           title: 'Our Mission',
-          content: 'To democratize technology and make powerful tools accessible to everyone, regardless of their technical background.',
+          content:
+            'To democratize technology and make powerful tools accessible to everyone, regardless of their technical background.',
           variant: 'primary',
         },
       },
@@ -114,7 +121,8 @@ export async function initializeDemoPages(): Promise<void> {
         type: 'Card',
         props: {
           title: 'Our Vision',
-          content: 'A world where technology serves humanity, fostering creativity, collaboration, and sustainable growth.',
+          content:
+            'A world where technology serves humanity, fostering creativity, collaboration, and sustainable growth.',
           variant: 'secondary',
         },
       },
