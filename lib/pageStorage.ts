@@ -1,8 +1,9 @@
-import { PrismaClient, Page as PrismaPage } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { PageData } from './types';
 
 
 const prisma = new PrismaClient();
+
 
 export async function savePage(pageData: PageData): Promise<void> {
   await prisma.page.upsert({
@@ -19,6 +20,8 @@ export async function getPage(slug: string): Promise<PageData | undefined> {
   const page = await prisma.page.findUnique({
     where: { slug },
   });
+console.log('Slug:', slug);
+;
 
   return page
     ? {
@@ -30,7 +33,8 @@ export async function getPage(slug: string): Promise<PageData | undefined> {
 
 export async function getAllPages(): Promise<PageData[]> {
   const pages = await prisma.page.findMany();
-  return pages.map((page: PrismaPage) => ({
+  console.log('All pages:', pages)
+  return pages.map((page: { slug: string; components: unknown }) => ({
     slug: page.slug,
     components: page.components as unknown as PageData['components'],
   }));
