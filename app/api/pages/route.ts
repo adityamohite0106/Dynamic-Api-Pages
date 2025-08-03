@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { savePage, getAllPages, initializeDemoPages } from '../../../lib/pageStorage';
 import { PageData } from '../../../lib/types';
 
-// Initialize demo pages on server start
-initializeDemoPages();
-
 export async function POST(request: NextRequest) {
   try {
+    // Initialize demo pages on first POST request
+    await initializeDemoPages();
+
     const body: PageData = await request.json();
 
     // Validate required fields
@@ -71,6 +71,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
+    // Initialize demo pages on first GET request
+    await initializeDemoPages();
+
     const pages = await getAllPages();
     return NextResponse.json({
       pages: pages.map(page => ({
