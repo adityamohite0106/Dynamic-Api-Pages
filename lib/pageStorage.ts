@@ -1,29 +1,50 @@
-import { PageData } from './types'
+import { PrismaClient } from '@prisma/client';
+import { PageData } from './types';
 
-// In-memory storage for demo purposes
-// In production, you'd use a database
-const pages = new Map<string, PageData>()
+const prisma = new PrismaClient();
 
-export function savePage(pageData: PageData): void {
-  pages.set(pageData.slug, pageData)
+export async function savePage(pageData: PageData): Promise<void> {
+  await prisma.page.upsert({
+    where: { slug: pageData.slug },
+    update: { components: pageData.components as any },
+    create: {
+      slug: pageData.slug,
+      components: pageData.components as any,
+    },
+  });
 }
 
-export function getPage(slug: string): PageData | undefined {
-  return pages.get(slug)
+export async function getPage(slug: string): Promise<PageData | undefined> {
+  const page = await prisma.page.findUnique({
+    where: { slug },
+  });
+  return page ? { slug: page.slug, components: page.components as PageData['components'] } : undefined;
 }
 
-export function getAllPages(): PageData[] {
-  return Array.from(pages.values())
+export async function getAllPages(): Promise<PageData[]> {
+  const pages = await prisma.page.findMany();
+  return pages.map((page: { slug: string; components: PageData['components'] }) => ({
+    slug: page.slug,
+    components: page.components,
+  }));
 }
 
-export function deletePage(slug: string): boolean {
-  return pages.delete(slug)
+export async function deletePage(slug: string): Promise<boolean> {
+  try {
+    await prisma.page.delete({
+      where: { slug },
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-// Initialize with demo pages
-export function initializeDemoPages(): void {
-  // Demo Product Page
-  savePage({
+export async function initializeDemoPages(): Promise<void> {
+  const existingPages = await prisma.page.count();
+  if (existingPages > 0) return; // Skip if demo pages exist
+
+  await savePage({
     slug: 'demo-product',
     components: [
       {
@@ -32,8 +53,8 @@ export function initializeDemoPages(): void {
           title: 'Revolutionary Product Launch',
           content: 'Introducing our latest innovation that will change the way you work.',
           size: 'lg',
-          align: 'center'
-        }
+          align: 'center',
+        },
       },
       {
         type: 'ImageBlock',
@@ -42,8 +63,8 @@ export function initializeDemoPages(): void {
           alt: 'Product showcase',
           caption: 'Our flagship product in action',
           width: 800,
-          height: 400
-        }
+          height: 400,
+        },
       },
       {
         type: 'StatsBox',
@@ -51,9 +72,9 @@ export function initializeDemoPages(): void {
           stats: [
             { label: 'Users', value: '10,000+', description: 'Active monthly users' },
             { label: 'Growth', value: '150%', description: 'Year over year' },
-            { label: 'Rating', value: '4.9/5', description: 'Customer satisfaction' }
-          ]
-        }
+            { label: 'Rating', value: '4.9/5', description: 'Customer satisfaction' },
+          ],
+        },
       },
       {
         type: 'CTA',
@@ -61,40 +82,40 @@ export function initializeDemoPages(): void {
           text: 'Try It Free Today',
           href: '/signup',
           variant: 'primary',
-          size: 'lg'
-        }
-      }
-    ]
-  })
+          size: 'lg',
+        },
+      },
+    ],
+  });
 
-  // Company Overview Page
-  savePage({
+  await savePage({
     slug: 'company-overview',
     components: [
       {
         type: 'TextSection',
         props: {
           title: 'About Our Company',
-          content: 'We are a forward-thinking technology company dedicated to creating innovative solutions that empower businesses and individuals to achieve their goals.',
+          content:
+            'We are a forward-thinking technology company dedicated to creating innovative solutions that empower businesses and individuals to achieve their goals.',
           size: 'md',
-          align: 'center'
-        }
+          align: 'center',
+        },
       },
       {
         type: 'Card',
         props: {
           title: 'Our Mission',
           content: 'To democratize technology and make powerful tools accessible to everyone, regardless of their technical background.',
-          variant: 'primary'
-        }
+          variant: 'primary',
+        },
       },
       {
         type: 'Card',
         props: {
           title: 'Our Vision',
           content: 'A world where technology serves humanity, fostering creativity, collaboration, and sustainable growth.',
-          variant: 'secondary'
-        }
+          variant: 'secondary',
+        },
       },
       {
         type: 'ImageBlock',
@@ -103,8 +124,8 @@ export function initializeDemoPages(): void {
           alt: 'Team collaboration',
           caption: 'Our diverse team working together',
           width: 800,
-          height: 400
-        }
+          height: 400,
+        },
       },
       {
         type: 'StatsBox',
@@ -112,10 +133,10 @@ export function initializeDemoPages(): void {
           stats: [
             { label: 'Founded', value: '2020', description: 'Years of innovation' },
             { label: 'Team Size', value: '50+', description: 'Talented professionals' },
-            { label: 'Countries', value: '15', description: 'Global presence' }
-          ]
-        }
-      }
-    ]
-  })
+            { label: 'Countries', value: '15', description: 'Global presence' },
+          ],
+        },
+      },
+    ],
+  });
 }

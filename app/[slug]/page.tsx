@@ -1,22 +1,19 @@
-import { notFound } from 'next/navigation'
-import { getPage, initializeDemoPages } from '../../lib/pageStorage'
-import ComponentRenderer from '../../components/ComponentRenderer'
-import Link from 'next/link'
-
-// Initialize demo pages
-initializeDemoPages()
+import { notFound } from 'next/navigation';
+import { getPage } from '../../lib/pageStorage';
+import ComponentRenderer from '../../components/ComponentRenderer';
+import Link from 'next/link';
 
 interface PageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
-export default function DynamicPage({ params }: PageProps) {
-  const page = getPage(params.slug)
-  
+export default async function DynamicPage({ params }: PageProps) {
+  const page = await getPage(params.slug);
+
   if (!page) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -25,8 +22,8 @@ export default function DynamicPage({ params }: PageProps) {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-blue-600 hover:text-blue-800 font-medium"
             >
               ← Back to Home
@@ -56,5 +53,5 @@ export default function DynamicPage({ params }: PageProps) {
         </div>
       </footer>
     </div>
-  )
+  );
 }
